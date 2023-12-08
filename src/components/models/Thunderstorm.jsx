@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
-export function Thunderstorm(props) {
+export default function Thunderstorm(props) {
   const { nodes, materials } = useGLTF("./models/weather-icons/thunderstorm.glb");
   return (
     <group {...props} dispose={null}>

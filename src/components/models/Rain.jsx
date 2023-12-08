@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
-export function Rain(props) {
+export default function Rain(props) {
   const { nodes, materials } = useGLTF("./models/weather-icons/rain.glb");
   return (
     <group {...props} dispose={null}>
