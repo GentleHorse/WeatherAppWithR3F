@@ -1,9 +1,13 @@
-import { useGLTF, OrbitControls } from "@react-three/drei";
+import { MeshTransmissionMaterial, useGLTF, OrbitControls } from "@react-three/drei";
 import { Perf } from "r3f-perf";
-import Floor from "./components/Floor.jsx";
-import WeatherIcons from "./components/models/WeatherIcons.jsx";
+import Scene from "./components/Scene.jsx";
+
 
 export default function Experience() {
+  const clear = useGLTF("./models/weather-icons/clear-small.glb");
+
+  let loadedIcon = clear;
+
   return (
     <>
       <Perf position="top-left" />
@@ -13,9 +17,14 @@ export default function Experience() {
       <directionalLight castShadow position={[1, 2, 3]} intensity={4.5} />
       <ambientLight intensity={1.5} />
 
-      <Floor />
+      <Scene />
 
-      <WeatherIcons />
+      <mesh>
+        <sphereGeometry />
+        <MeshTransmissionMaterial />
+      </mesh>
+
+      <primitive object={loadedIcon.scene} />
     </>
   );
 }
