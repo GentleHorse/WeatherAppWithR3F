@@ -1,12 +1,12 @@
-import { MeshTransmissionMaterial, useGLTF, OrbitControls } from "@react-three/drei";
+import { useGLTF, OrbitControls } from "@react-three/drei";
 import { Perf } from "r3f-perf";
 import Scene from "./components/Scene.jsx";
-
 
 export default function Experience() {
   const clear = useGLTF("./models/weather-icons/clear-small.glb");
 
   let loadedIcon = clear;
+  
 
   return (
     <>
@@ -19,12 +19,7 @@ export default function Experience() {
 
       <Scene />
 
-      <mesh>
-        <sphereGeometry />
-        <MeshTransmissionMaterial />
-      </mesh>
-
-      <primitive object={loadedIcon.scene} />
+      <primitive object={loadedIcon.scene} position-y={5} />
     </>
   );
 }
