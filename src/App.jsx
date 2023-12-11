@@ -21,42 +21,45 @@ export default function App() {
   const getWeatherData = () => {
     axios.get(apiUrl).then((response) => {
       setWeatherData(response.data);
-      console.log("fechted weather data", response.data);
     });
     closewindowHandler();
   };
 
-  // if (isWindowOpen == false) {
-  //   return (
-  //     <>
-  //       <Backdrop />
-  //       <div className={classes.searchBox}>
-  //         <div className={classes.control}>
-  //           <p>WEATHER CHECKER</p>
-  //           <input
-  //             value={location}
-  //             onChange={(event) => setLocation(event.target.value)}
-  //             placeholder="Type a city name where you want to check the weather"
-  //             type="text"
-  //           />
-  //           <button onClick={getWeatherData}>See Weather</button>
-  //         </div>
-  //       </div>
-  //     </>
-  //   );
-  // }
+  if (isWindowOpen == false) {
+    return (
+      <>
+        <Backdrop />
+        <div className={classes.searchBox}>
+          <div className={classes.control}>
+            <p>WEATHER CHECKER</p>
+            <input
+              value={location}
+              onChange={(event) => setLocation(event.target.value)}
+              placeholder="Type a city name where you want to check the weather"
+              type="text"
+            />
+            <button onClick={getWeatherData}>See Weather</button>
+          </div>
+        </div>
+      </>
+    );
+  }
 
-  return (
-    <Canvas
-      shadows
-      camera={{
-        fov: 45,
-        near: 0.1,
-        far: 200,
-        position: [0, -0.5, 6],
-      }}
-    >
-      <Experience />
-    </Canvas>
-  );
+  if(weatherData) {
+    return (
+      <Canvas
+        shadows
+        camera={{
+          fov: 45,
+          near: 0.1,
+          far: 200,
+          position: [-2, -2.3, 10],
+        }}
+      >
+        <Experience weather={weatherData} />
+      </Canvas>
+    );
+  }
+
+  return;
 }
