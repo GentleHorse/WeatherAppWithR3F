@@ -53,7 +53,7 @@ export default function App() {
           fov: 45,
           near: 0.1,
           far: 200,
-          position: [3, 2.5, 20],
+          position: [5, 5, 25],
         }}
       >
         <Experience location={location} weather={weatherData} />

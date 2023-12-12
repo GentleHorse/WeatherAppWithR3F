@@ -3,12 +3,12 @@ import { Center, Text3D } from "@react-three/drei";
 export default function WeatherText({ location, weather }) {
   return (
     <>
-      <group position={[6, 7, 4]}>
+      <group position={[-10, -1, 2]}>
         <Center>
           <Text3D
             font="./fonts/helvetiker_regular.typeface.json"
-            size={0.75}
-            height={0.2}
+            size={1.8}
+            height={0.5}
             curveSegments={12}
             bevelEnabled
             bevelThickness={0.02}
@@ -16,7 +16,7 @@ export default function WeatherText({ location, weather }) {
             bevelOffset={0}
             bevelSegments={5}
           >
-            City Name: {location}
+            {location.toUpperCase()}
           </Text3D>
         </Center>
       </group>

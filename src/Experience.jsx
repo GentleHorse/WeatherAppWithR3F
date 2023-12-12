@@ -69,14 +69,14 @@ export default function Experience(props) {
       <Scene weather={weatherCondition} />
       {/* <Scene /> */}
 
-      <primitive object={loadedIcon.scene} position={[-8, 0, 2]} scale={3}/>
+      <primitive object={loadedIcon.scene} position={[-10, 2.5, 0]} scale={4.5}/>
 
       <WeatherText location={props.location} weather={props.weather}/>
 
       <primitive
         object={marina.scene}
-        scale={0.8}
-        position={[-2.5, -2.5, 4]}
+        scale={1.2}
+        position={[-2.5, -2.5, 8]}
         rotation-y={Math.PI * 0.7}
       />
     </>

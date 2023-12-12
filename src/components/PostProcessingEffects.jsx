@@ -14,7 +14,7 @@ const PostProcessingEffects = () => {
   const [isNoiseEffectActive, setIsNoiseEffectActive] = useState(false);
 
   const vignetteUI = useControls("vignette", {
-    eskil: { value: true },
+    eskil: { value: false },
     offset: { value: 0.3, min: 0, max: 1, step: 0.01 },
     darkness: { value: 0.9, min: 0, max: 1, step: 0.01 },
     blendFunction: {
@@ -40,9 +40,9 @@ const PostProcessingEffects = () => {
   });
 
   const { focusDistance, focalLength, bokehScale } = useControls("depth of field", {
-    focusDistance: { value: 0.8, min: 0, max: 1, step: 0.001 },
-    focalLength: { value: 0.8, min: 0, max: 1, step: 0.001 },
-    bokehScale: { value: 6, min: 0, max: 10, step: 0.01 },
+    focusDistance: { value: 0.92, min: 0, max: 1, step: 0.001 },
+    focalLength: { value: 0.92, min: 0, max: 1, step: 0.001 },
+    bokehScale: { value: 2, min: 0, max: 10, step: 0.01 },
   });
 
   return (
