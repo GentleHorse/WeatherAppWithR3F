@@ -1,13 +1,25 @@
-import { MeshReflectorMaterial, useVideoTexture } from "@react-three/drei";
+import { useRef } from "react";
+import {
+  useGLTF,
+  MeshReflectorMaterial,
+  useVideoTexture,
+} from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
 
 export default function Scene(props) {
   const videoTexture = useVideoTexture(`./videos/${props.weather}.mp4`);
+  // const videoTexture = useVideoTexture("./videos/clear.mp4");
+
+  const sphereRef = useRef();
+  useFrame((state, delta) => {
+    sphereRef.current.rotation.y += delta * 0.2;
+  })
 
   return (
     <>
       <color args={["black"]} attach="background" />
       <mesh receiveShadow position-y={-2.5} rotation-x={-Math.PI * 0.5}>
-        <planeGeometry args={[20, 20]} />
+        <planeGeometry args={[50, 50]} />
         <MeshReflectorMaterial
           resolution={512}
           blur={[1000, 1000]}
@@ -17,14 +29,10 @@ export default function Scene(props) {
         />
       </mesh>
 
-      <mesh position={[0, 0, 0]} scale={2.5}>
-        <sphereGeometry />
+      <mesh ref={sphereRef} position={[0, 5, -10]} scale={10}>
+        {/* <planeGeometry args={[1.28, 0.72]} /> */}
+        <sphereGeometry args={[1, 4, 2]} />
         <meshBasicMaterial map={videoTexture} toneMapped={false} />
-      </mesh>
-
-      <mesh position={[-2.5, 0, 0]} scale={5}>
-        <boxGeometry args={[1, 1, 0.1]} />
-        <meshStandardMaterial color="silver" roughness={0.1} metalness={0.7}/>
       </mesh>
     </>
   );

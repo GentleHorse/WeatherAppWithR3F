@@ -1,7 +1,9 @@
 import { useEffect } from "react";
-import { useGLTF, OrbitControls, Environment } from "@react-three/drei";
+import { Lightformer, useGLTF, OrbitControls, Environment } from "@react-three/drei";
 import { Perf } from "r3f-perf";
 import Scene from "./components/Scene.jsx";
+import WeatherText from "./components/WeatherText.jsx";
+import PostProcessingEffects from "./components/PostProcessingEffects.jsx";
 
 export default function Experience(props) {
   let weatherCondition;
@@ -47,8 +49,9 @@ export default function Experience(props) {
     `./models/weather-icons/${weatherCondition}-small.glb`
   );
 
-  const karina = useGLTF("./models/Marina-1276/Marina-1276.glb");
+  // const loadedIcon = useGLTF("./models/weather-icons/clear-small.glb");
 
+  const marina = useGLTF("./models/Marina-1276/Marina-1276.glb");
 
   return (
     <>
@@ -56,17 +59,23 @@ export default function Experience(props) {
 
       <OrbitControls makeDefault />
 
-      <Environment preset="city" />
+      <Environment preset="night"/>
 
-      <directionalLight castShadow position={[1, 2, 3]} intensity={4.5} />
-      <ambientLight intensity={1.5} />
+      <directionalLight castShadow position={[1, 2, 3]} intensity={0.5} />
+      <ambientLight intensity={0.5} />
+
+      <PostProcessingEffects />
 
       <Scene weather={weatherCondition} />
+      {/* <Scene /> */}
 
-      <primitive object={loadedIcon.scene} position={[2, -1.5, 2]} />
+      <primitive object={loadedIcon.scene} position={[-8, 0, 2]} scale={3}/>
+
+      <WeatherText location={props.location} weather={props.weather}/>
+
       <primitive
-        object={karina.scene}
-        scale={0.7}
+        object={marina.scene}
+        scale={0.8}
         position={[-2.5, -2.5, 4]}
         rotation-y={Math.PI * 0.7}
       />

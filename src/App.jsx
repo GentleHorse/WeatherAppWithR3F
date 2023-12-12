@@ -53,13 +53,27 @@ export default function App() {
           fov: 45,
           near: 0.1,
           far: 200,
-          position: [-2, -2.3, 10],
+          position: [3, 2.5, 20],
         }}
       >
-        <Experience weather={weatherData} />
+        <Experience location={location} weather={weatherData} />
       </Canvas>
     );
   }
 
   return;
+
+  // return (
+  //   <Canvas
+  //     shadows
+  //     camera={{
+  //       fov: 45,
+  //       near: 0.1,
+  //       far: 200,
+  //       position: [3, 5, 25],
+  //     }}
+  //   >
+  //     <Experience location={location} weather={weatherData} />
+  //   </Canvas>
+  // );
 }
