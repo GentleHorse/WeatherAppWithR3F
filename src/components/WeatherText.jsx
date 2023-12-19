@@ -1,9 +1,9 @@
 import { Center, Text3D } from "@react-three/drei";
 
-export default function WeatherText({ location, weather }) {
+export default function WeatherText({ location, weather, scale }) {
   return (
-    <>
-      <group position={[-10, -1, 2]}>
+    <group scale={scale}>
+      <group position={[-5, -1, 2]}>
         <Center>
           <Text3D
             font="./fonts/helvetiker_regular.typeface.json"
@@ -21,7 +21,7 @@ export default function WeatherText({ location, weather }) {
         </Center>
       </group>
 
-      <group position={[6, 5, 4]}>
+      <group position={[6, 3, 4]}>
         <Center>
           <Text3D
             font="./fonts/helvetiker_regular.typeface.json"
@@ -39,7 +39,7 @@ export default function WeatherText({ location, weather }) {
         </Center>
       </group>
 
-      <group position={[6, 3, 4]}>
+      {/* <group position={[6, 3, 4]}>
         <Center>
           <Text3D
             font="./fonts/helvetiker_regular.typeface.json"
@@ -55,7 +55,7 @@ export default function WeatherText({ location, weather }) {
             Weather Condition: {weather.weather[0].main}
           </Text3D>
         </Center>
-      </group>
+      </group> */}
 
       <group position={[6, 1, 4]}>
         <Center>
@@ -92,6 +92,6 @@ export default function WeatherText({ location, weather }) {
           </Text3D>
         </Center>
       </group>
-    </>
+    </group>
   );
 }

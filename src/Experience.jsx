@@ -1,5 +1,10 @@
 import { useEffect } from "react";
-import { Lightformer, useGLTF, OrbitControls, Environment } from "@react-three/drei";
+import {
+  Lightformer,
+  useGLTF,
+  OrbitControls,
+  Environment,
+} from "@react-three/drei";
 import { Perf } from "r3f-perf";
 import Scene from "./components/Scene.jsx";
 import WeatherText from "./components/WeatherText.jsx";
@@ -59,7 +64,7 @@ export default function Experience(props) {
 
       <OrbitControls makeDefault />
 
-      <Environment preset="night"/>
+      <Environment preset="night" />
 
       <directionalLight castShadow position={[1, 2, 3]} intensity={0.5} />
       <ambientLight intensity={0.5} />
@@ -69,14 +74,24 @@ export default function Experience(props) {
       <Scene weather={weatherCondition} />
       {/* <Scene /> */}
 
-      <primitive object={loadedIcon.scene} position={[-10, 2.5, 0]} scale={4.5}/>
+      <group scale={0.5}>
+        <primitive
+          object={loadedIcon.scene}
+          position={[-5, 2.5, 0]}
+          scale={4.5}
+        />
+      </group>
 
-      <WeatherText location={props.location} weather={props.weather}/>
+      <WeatherText
+        location={props.location}
+        weather={props.weather}
+        scale={0.5}
+      />
 
       <primitive
         object={marina.scene}
         scale={1.2}
-        position={[-2.5, -2.5, 8]}
+        position={[-1.5, -2.5, 4]}
         rotation-y={Math.PI * 0.7}
       />
     </>

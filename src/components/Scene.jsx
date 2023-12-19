@@ -19,7 +19,7 @@ export default function Scene(props) {
     <>
       <color args={["black"]} attach="background" />
       <mesh receiveShadow position-y={-2.5} rotation-x={-Math.PI * 0.5}>
-        <planeGeometry args={[50, 50]} />
+        <planeGeometry args={[25, 25]} />
         <MeshReflectorMaterial
           resolution={512}
           blur={[1000, 1000]}
@@ -29,7 +29,7 @@ export default function Scene(props) {
         />
       </mesh>
 
-      <mesh ref={sphereRef} position={[0, 5, -10]} scale={10}>
+      <mesh ref={sphereRef} position={[0, 2.5, -5]} scale={5}>
         {/* <planeGeometry args={[1.28, 0.72]} /> */}
         <sphereGeometry args={[1, 4, 2]} />
         <meshBasicMaterial map={videoTexture} toneMapped={false} />
