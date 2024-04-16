@@ -18,12 +18,16 @@ export default function App() {
   const apiKey = "7a11ff201910162a879e7aa32d259914";
   const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&units=metric`;
 
-  const getWeatherData = () => {
-    axios.get(apiUrl).then((response) => {
-      setWeatherData(response.data);
-    });
+  async function getWeatherData(){
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+
+    if (data){
+      setWeatherData(data);
+    }
+
     closewindowHandler();
-  };
+  }
 
   if (isWindowOpen == false) {
     return (
