@@ -1,14 +1,9 @@
-import { useEffect } from "react";
-import {
-  Lightformer,
-  useGLTF,
-  OrbitControls,
-  Environment,
-} from "@react-three/drei";
+import { useGLTF, OrbitControls, Environment } from "@react-three/drei";
 import { Perf } from "r3f-perf";
 import Scene from "./components/Scene.jsx";
 import WeatherText from "./components/WeatherText.jsx";
 import PostProcessingEffects from "./components/PostProcessingEffects.jsx";
+import { Suspense } from "react";
 
 export default function Experience(props) {
   let weatherCondition;
@@ -54,40 +49,47 @@ export default function Experience(props) {
     `./models/weather-icons/${weatherCondition}-small.glb`
   );
 
-  // const loadedIcon = useGLTF("./models/weather-icons/clear-small.glb");
-
   const marina = useGLTF("./models/Marina-1276/Marina-1276.glb");
 
   return (
     <>
+      {/* DEBUG TOOLS */}
       <Perf position="top-left" />
-
       <OrbitControls makeDefault />
 
+      {/* ENVIRONMENT */}
       <Environment preset="night" />
-
       <directionalLight castShadow position={[1, 2, 3]} intensity={0.5} />
       <ambientLight intensity={0.5} />
+      <color args={["black"]} attach="background" />
 
+      {/* POSTPROCESSING */}
       <PostProcessingEffects />
 
+      {/* SCENE */}
       <Scene weather={weatherCondition} />
-      {/* <Scene /> */}
 
-      <group scale={0.5}>
-        <primitive
-          object={loadedIcon.scene}
-          position={[-5, 2.5, 0]}
-          scale={4.5}
+      {/* WEATHER ICON */}
+      <Suspense>
+        <group scale={0.5}>
+          <primitive
+            object={loadedIcon.scene}
+            position={[-5, 2.5, 0]}
+            scale={4.5}
+          />
+        </group>
+      </Suspense>
+
+      {/* WEATHER TEXT */}
+      <Suspense>
+        <WeatherText
+          location={props.location}
+          weather={props.weather}
+          scale={0.5}
         />
-      </group>
+      </Suspense>
 
-      <WeatherText
-        location={props.location}
-        weather={props.weather}
-        scale={0.5}
-      />
-
+      {/* MARINA */}
       <primitive
         object={marina.scene}
         scale={1.2}

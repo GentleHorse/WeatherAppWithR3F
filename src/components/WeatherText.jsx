@@ -1,13 +1,16 @@
 import { Center, Text3D } from "@react-three/drei";
 
+const TEXT_COLOR_EMISSION_STRENGTH = 10;
+
 export default function WeatherText({ location, weather, scale }) {
   return (
     <group scale={scale}>
-      <group position={[-5, -1, 2]}>
+      {/* CITY NAME */}
+      <group position={[-5, -3, 2]}>
         <Center>
           <Text3D
             font="./fonts/helvetiker_regular.typeface.json"
-            size={1.8}
+            size={3.2}
             height={0.5}
             curveSegments={12}
             bevelEnabled
@@ -17,80 +20,93 @@ export default function WeatherText({ location, weather, scale }) {
             bevelSegments={5}
           >
             {location.toUpperCase()}
+            <meshBasicMaterial
+              color={[
+                1 * TEXT_COLOR_EMISSION_STRENGTH,
+                1 * TEXT_COLOR_EMISSION_STRENGTH,
+                1 * TEXT_COLOR_EMISSION_STRENGTH,
+              ]}
+            />
           </Text3D>
         </Center>
       </group>
 
-      <group position={[6, 3, 4]}>
-        <Center>
-          <Text3D
-            font="./fonts/helvetiker_regular.typeface.json"
-            size={0.75}
-            height={0.2}
-            curveSegments={12}
-            bevelEnabled
-            bevelThickness={0.02}
-            bevelSize={0.02}
-            bevelOffset={0}
-            bevelSegments={5}
-          >
-           Temperature: {weather.main.temp.toFixed(1)}°C
-          </Text3D>
-        </Center>
-      </group>
+      {/* WEATHER DATA DETAILS */}
+      <group position={[0, 3, 0]}>
+        <group position={[6, 3, 4]}>
+          <Center>
+            <Text3D
+              font="./fonts/helvetiker_regular.typeface.json"
+              size={0.75}
+              height={0.2}
+              curveSegments={12}
+              bevelEnabled
+              bevelThickness={0.02}
+              bevelSize={0.02}
+              bevelOffset={0}
+              bevelSegments={5}
+            >
+              Temperature: {weather.main.temp.toFixed(1)}°C
+              <meshBasicMaterial
+                color={[
+                  1 * TEXT_COLOR_EMISSION_STRENGTH,
+                  1 * TEXT_COLOR_EMISSION_STRENGTH,
+                  1 * TEXT_COLOR_EMISSION_STRENGTH,
+                ]}
+              />
+            </Text3D>
+          </Center>
+        </group>
 
-      {/* <group position={[6, 3, 4]}>
-        <Center>
-          <Text3D
-            font="./fonts/helvetiker_regular.typeface.json"
-            size={0.75}
-            height={0.2}
-            curveSegments={12}
-            bevelEnabled
-            bevelThickness={0.02}
-            bevelSize={0.02}
-            bevelOffset={0}
-            bevelSegments={5}
-          >
-            Weather Condition: {weather.weather[0].main}
-          </Text3D>
-        </Center>
-      </group> */}
+        <group position={[6, 1, 4]}>
+          <Center>
+            <Text3D
+              font="./fonts/helvetiker_regular.typeface.json"
+              size={0.75}
+              height={0.2}
+              curveSegments={12}
+              bevelEnabled
+              bevelThickness={0.02}
+              bevelSize={0.02}
+              bevelOffset={0}
+              bevelSegments={5}
+            >
+              Humidity: {weather.main.humidity}%
+              <meshBasicMaterial
+                color={[
+                  1 * TEXT_COLOR_EMISSION_STRENGTH,
+                  1 * TEXT_COLOR_EMISSION_STRENGTH,
+                  1 * TEXT_COLOR_EMISSION_STRENGTH,
+                ]}
+              />
+            </Text3D>
+          </Center>
+        </group>
 
-      <group position={[6, 1, 4]}>
-        <Center>
-          <Text3D
-            font="./fonts/helvetiker_regular.typeface.json"
-            size={0.75}
-            height={0.2}
-            curveSegments={12}
-            bevelEnabled
-            bevelThickness={0.02}
-            bevelSize={0.02}
-            bevelOffset={0}
-            bevelSegments={5}
-          >
-            Humidity: {weather.main.humidity}%
-          </Text3D>
-        </Center>
-      </group>
-
-      <group position={[6, -1, 4]}>
-        <Center>
-          <Text3D
-            font="./fonts/helvetiker_regular.typeface.json"
-            size={0.75}
-            height={0.2}
-            curveSegments={12}
-            bevelEnabled
-            bevelThickness={0.02}
-            bevelSize={0.02}
-            bevelOffset={0}
-            bevelSegments={5}
-          >
-            Wind Speed: {weather.wind.speed.toFixed(1)}MPH
-          </Text3D>
-        </Center>
+        <group position={[6, -1, 4]}>
+          <Center>
+            <Text3D
+              font="./fonts/helvetiker_regular.typeface.json"
+              size={0.75}
+              height={0.2}
+              curveSegments={12}
+              bevelEnabled
+              bevelThickness={0.02}
+              bevelSize={0.02}
+              bevelOffset={0}
+              bevelSegments={5}
+            >
+              Wind Speed: {weather.wind.speed.toFixed(1)}MPH
+              <meshBasicMaterial
+                color={[
+                  1 * TEXT_COLOR_EMISSION_STRENGTH,
+                  1 * TEXT_COLOR_EMISSION_STRENGTH,
+                  1 * TEXT_COLOR_EMISSION_STRENGTH,
+                ]}
+              />
+            </Text3D>
+          </Center>
+        </group>
       </group>
     </group>
   );
