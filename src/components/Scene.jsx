@@ -8,7 +8,7 @@ export default function Scene(props) {
   return (
     <>
       {/* FLOOR */}
-      <RigidBody type="fixed">
+      <RigidBody type="fixed" restitution={0.5}>
         <mesh receiveShadow position-y={-2.5} rotation-x={-Math.PI * 0.5}>
           <planeGeometry args={[25, 25]} />
           <MeshReflectorMaterial

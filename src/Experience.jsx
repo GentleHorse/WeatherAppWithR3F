@@ -68,12 +68,12 @@ export default function Experience(props) {
       {/* POSTPROCESSING */}
       <PostProcessingEffects />
 
-      <Physics debug={true}>
+      <Physics debug={false} gravity={[0, -4.5, 0]}>
         {/* SCENE */}
         <Scene weather={weatherCondition} />
 
         {/* FALLING WEAHTER ICONS */}
-        <FallingWeatherIcons />
+        <FallingWeatherIcons weatherCondition={weatherCondition} />
 
         {/* WEATHER ICON */}
         <Suspense>
@@ -100,7 +100,7 @@ export default function Experience(props) {
         </Suspense>
 
         {/* MARINA */}
-        <RigidBody type="fixed">
+        <RigidBody type="fixed" colliders="hull">
           <primitive
             object={marina.scene}
             scale={1.2}
