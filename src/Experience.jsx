@@ -1,5 +1,10 @@
 import { Suspense } from "react";
-import { useGLTF, OrbitControls, Environment } from "@react-three/drei";
+import {
+  useGLTF,
+  OrbitControls,
+  Environment,
+  PresentationControls,
+} from "@react-three/drei";
 import { Perf } from "r3f-perf";
 import { Physics, RigidBody } from "@react-three/rapier";
 import Scene from "./components/Scene.jsx";
@@ -57,58 +62,65 @@ export default function Experience(props) {
     <>
       {/* DEBUG TOOLS */}
       <Perf position="top-left" />
-      <OrbitControls makeDefault />
+      {/* <OrbitControls makeDefault /> */}
 
       {/* ENVIRONMENT */}
       <Environment preset="night" />
-      <directionalLight castShadow position={[1, 2, 3]} intensity={0.5} />
-      <ambientLight intensity={0.5} />
+      {/* <directionalLight castShadow position={[1, 2, 3]} intensity={0.5} /> */}
+      {/* <ambientLight intensity={0.5} /> */}
       <color args={["black"]} attach="background" />
 
       {/* POSTPROCESSING */}
       <PostProcessingEffects />
 
-      <Physics debug={false} gravity={[0, -4.5, 0]}>
-        {/* SCENE */}
-        <Scene weather={weatherCondition} />
+      <PresentationControls
+        global
+        polar={[0.0, 0.0]}
+        azimuth={[-0.75, 1.2]}
+        // config={{ mass: 2, tension: 400 }}
+      >
+        <Physics debug={false} gravity={[0, -4.5, 0]}>
+          {/* SCENE */}
+          <Scene weather={weatherCondition} />
 
-        {/* FALLING WEAHTER ICONS */}
-        <FallingWeatherIcons weatherCondition={weatherCondition} />
+          {/* FALLING WEAHTER ICONS */}
+          <FallingWeatherIcons weatherCondition={weatherCondition} />
 
-        {/* WEATHER ICON */}
-        <Suspense>
-          <RigidBody type="fixed">
-            <group scale={0.5}>
-              <primitive
-                object={loadedIcon.scene}
-                position={[-5, 2.5, 0]}
-                scale={4.5}
+          {/* WEATHER ICON */}
+          <Suspense>
+            <RigidBody type="fixed">
+              <group scale={0.5}>
+                <primitive
+                  object={loadedIcon.scene}
+                  position={[-5, 2.5, 0]}
+                  scale={4.5}
+                />
+              </group>
+            </RigidBody>
+          </Suspense>
+
+          {/* WEATHER TEXT */}
+          <Suspense>
+            <RigidBody type="fixed">
+              <WeatherText
+                location={props.location}
+                weather={props.weather}
+                scale={0.5}
               />
-            </group>
-          </RigidBody>
-        </Suspense>
+            </RigidBody>
+          </Suspense>
 
-        {/* WEATHER TEXT */}
-        <Suspense>
-          <RigidBody type="fixed">
-            <WeatherText
-              location={props.location}
-              weather={props.weather}
-              scale={0.5}
+          {/* MARINA */}
+          <RigidBody type="fixed" colliders="hull">
+            <primitive
+              object={marina.scene}
+              scale={1.2}
+              position={[-1.5, -2.5, 4]}
+              rotation-y={Math.PI * 0.7}
             />
           </RigidBody>
-        </Suspense>
-
-        {/* MARINA */}
-        <RigidBody type="fixed" colliders="hull">
-          <primitive
-            object={marina.scene}
-            scale={1.2}
-            position={[-1.5, -2.5, 4]}
-            rotation-y={Math.PI * 0.7}
-          />
-        </RigidBody>
-      </Physics>
+        </Physics>
+      </PresentationControls>
     </>
   );
 }
