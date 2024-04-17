@@ -20,7 +20,7 @@
 .control h1 {
   text-align: center;
   color: #0cb1ce;
-  font-weight:bolder;
+  font-weight: bolder;
   margin-bottom: 0em;
 }
 
@@ -45,7 +45,7 @@
   margin: 0.5rem;
 }
 
-.control input::placeholder  {
+.control input::placeholder {
   color: rgb(170, 178, 209);
 }
 
@@ -57,7 +57,7 @@
   border-radius: 10px;
   border: 1px solid #082267;
   padding: 1.5rem 0.25rem;
-  margin: 0.5rem;;
+  margin: 0.5rem;
 }
 
 .videoPlayer {

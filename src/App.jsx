@@ -1,5 +1,5 @@
-import axios from "axios";
-import { useState } from "react";
+import { Suspense, useState } from "react";
+import { Center, Html, Text3D } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import Experience from "./Experience.jsx";
 import Backdrop from "./components/Backdrop.jsx";
@@ -28,6 +28,25 @@ export default function App() {
 
     closewindowHandler();
   }
+
+  const loadingScreen = (
+    <Center>
+      <Text3D
+        font="./fonts/helvetiker_regular.typeface.json"
+        size={0.75}
+        height={0.2}
+        curveSegments={12}
+        bevelEnabled
+        bevelThickness={0.02}
+        bevelSize={0.02}
+        bevelOffset={0}
+        bevelSegments={5}
+      >
+        Loading weather models ....
+        <meshNormalMaterial />
+      </Text3D>
+    </Center>
+  );
 
   return (
     <>
@@ -60,7 +79,9 @@ export default function App() {
         }}
       >
         {weatherData && (
-          <Experience location={location} weather={weatherData} />
+          <Suspense fallback={loadingScreen}>
+            <Experience location={location} weather={weatherData} />
+          </Suspense>
         )}
       </Canvas>
     </>
