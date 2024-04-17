@@ -1,9 +1,11 @@
+import { Suspense } from "react";
 import { useGLTF, OrbitControls, Environment } from "@react-three/drei";
 import { Perf } from "r3f-perf";
+import { Physics, RigidBody } from "@react-three/rapier";
 import Scene from "./components/Scene.jsx";
 import WeatherText from "./components/WeatherText.jsx";
 import PostProcessingEffects from "./components/PostProcessingEffects.jsx";
-import { Suspense } from "react";
+import FallingWeatherIcons from "./components/FallingWeatherIcons.jsx";
 
 export default function Experience(props) {
   let weatherCondition;
@@ -66,36 +68,47 @@ export default function Experience(props) {
       {/* POSTPROCESSING */}
       <PostProcessingEffects />
 
-      {/* SCENE */}
-      <Scene weather={weatherCondition} />
+      <Physics debug={true}>
+        {/* SCENE */}
+        <Scene weather={weatherCondition} />
 
-      {/* WEATHER ICON */}
-      <Suspense>
-        <group scale={0.5}>
+        {/* FALLING WEAHTER ICONS */}
+        <FallingWeatherIcons />
+
+        {/* WEATHER ICON */}
+        <Suspense>
+          <RigidBody type="fixed">
+            <group scale={0.5}>
+              <primitive
+                object={loadedIcon.scene}
+                position={[-5, 2.5, 0]}
+                scale={4.5}
+              />
+            </group>
+          </RigidBody>
+        </Suspense>
+
+        {/* WEATHER TEXT */}
+        <Suspense>
+          <RigidBody type="fixed">
+            <WeatherText
+              location={props.location}
+              weather={props.weather}
+              scale={0.5}
+            />
+          </RigidBody>
+        </Suspense>
+
+        {/* MARINA */}
+        <RigidBody type="fixed">
           <primitive
-            object={loadedIcon.scene}
-            position={[-5, 2.5, 0]}
-            scale={4.5}
+            object={marina.scene}
+            scale={1.2}
+            position={[-1.5, -2.5, 4]}
+            rotation-y={Math.PI * 0.7}
           />
-        </group>
-      </Suspense>
-
-      {/* WEATHER TEXT */}
-      <Suspense>
-        <WeatherText
-          location={props.location}
-          weather={props.weather}
-          scale={0.5}
-        />
-      </Suspense>
-
-      {/* MARINA */}
-      <primitive
-        object={marina.scene}
-        scale={1.2}
-        position={[-1.5, -2.5, 4]}
-        rotation-y={Math.PI * 0.7}
-      />
+        </RigidBody>
+      </Physics>
     </>
   );
 }
