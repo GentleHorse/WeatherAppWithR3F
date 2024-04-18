@@ -1,10 +1,10 @@
 import { Suspense, useState } from "react";
-import { Center, Html, Text3D } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import Experience from "./Experience.jsx";
 import Backdrop from "./components/Backdrop.jsx";
-
+import LoadingScene from "./components/LoadingScene.jsx";
 import classes from "./App.module.css";
+
 
 export default function App() {
   const [location, setLocation] = useState("");
@@ -28,25 +28,6 @@ export default function App() {
 
     closewindowHandler();
   }
-
-  const loadingScreen = (
-    <Center>
-      <Text3D
-        font="./fonts/helvetiker_regular.typeface.json"
-        size={0.75}
-        height={0.2}
-        curveSegments={12}
-        bevelEnabled
-        bevelThickness={0.02}
-        bevelSize={0.02}
-        bevelOffset={0}
-        bevelSegments={5}
-      >
-        Loading weather models ....
-        <meshNormalMaterial />
-      </Text3D>
-    </Center>
-  );
 
   return (
     <>
@@ -79,7 +60,7 @@ export default function App() {
         }}
       >
         {weatherData && (
-          <Suspense fallback={loadingScreen}>
+          <Suspense fallback={<LoadingScene />}>
             <Experience location={location} weather={weatherData} />
           </Suspense>
         )}
