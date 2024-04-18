@@ -5,7 +5,6 @@ import Backdrop from "./components/Backdrop.jsx";
 import LoadingScene from "./components/LoadingScene.jsx";
 import classes from "./App.module.css";
 
-
 export default function App() {
   const [location, setLocation] = useState("");
   const [weatherData, setWeatherData] = useState(null);
@@ -22,11 +21,14 @@ export default function App() {
     const response = await fetch(apiUrl);
     const data = await response.json();
 
-    if (data) {
+    if (response.ok && data) {
       setWeatherData(data);
+      closewindowHandler();
     }
 
-    closewindowHandler();
+    if (!response.ok) {
+      alert("Please enter a valid city name");
+    }
   }
 
   return (
