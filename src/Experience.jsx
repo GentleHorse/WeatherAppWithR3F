@@ -61,7 +61,7 @@ export default function Experience(props) {
   return (
     <>
       {/* DEBUG TOOLS */}
-      <Perf position="top-left" />
+      {/* <Perf position="top-left" /> */}
       {/* <OrbitControls makeDefault /> */}
 
       {/* ENVIRONMENT */}
