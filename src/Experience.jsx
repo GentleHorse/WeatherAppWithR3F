@@ -63,6 +63,7 @@ export default function Experience(props) {
       {/* DEBUG TOOLS */}
       {/* <Perf position="top-left" /> */}
       {/* <OrbitControls makeDefault /> */}
+      {/* <axesHelper /> */}
 
       {/* ENVIRONMENT */}
       <Environment preset="night" />
@@ -76,10 +77,10 @@ export default function Experience(props) {
       <PresentationControls
         global
         polar={[0.0, 0.0]}
-        azimuth={[-0.75, 1.2]}
+        azimuth={[-0.95, 1.2]}
         // config={{ mass: 2, tension: 400 }}
       >
-        <Physics debug={false} gravity={[0, -4.5, 0]}>
+        <Physics debug={false} gravity={[0, -3.5, 0]}>
           {/* SCENE */}
           <Scene weather={weatherCondition} />
 

@@ -166,7 +166,7 @@ export default function FallingWeatherIcons({ weatherCondition }) {
   /**
    * Object instances' count & matrices
    */
-  const objectsCount = 100;
+  const objectsCount = 400;
   const instances = useMemo(() => {
     const instances = [];
 
@@ -174,9 +174,9 @@ export default function FallingWeatherIcons({ weatherCondition }) {
       instances.push({
         key: "instance_" + i,
         position: [
-          (Math.random() - 0.5) * 8,
-          4 + i * 0.2,
-          (Math.random() - 0.5) * 8,
+          (Math.random() - 0.5) * 10,
+          4 + i * 0.4,
+          (Math.random() - 0.5) * 10,
         ],
         rotation: [Math.random(), Math.random(), Math.random()],
       });
