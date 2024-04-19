@@ -166,7 +166,7 @@ export default function FallingWeatherIcons({ weatherCondition }) {
   /**
    * Object instances' count & matrices
    */
-  const objectsCount = 400;
+  const objectsCount = 200;
   const instances = useMemo(() => {
     const instances = [];
 
