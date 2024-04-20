@@ -28,6 +28,7 @@ export default function App() {
 
     if (!response.ok) {
       alert("Please enter a valid city name");
+      setLocation("");
     }
   }
 
